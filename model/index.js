@@ -1,13 +1,12 @@
-const User = require('./userModel');
-const Bus = require('./busModel');
-const Booking = require('./bookingModel');
+// const user = require('./userModel');
+// const bus = require('./busModel');
+// const booking = require('./bookingModel');
+
+// user.hasMany(booking);
+// booking.belongsTo(user);
+
+// bus.hasMany(booking)
+// booking.belongsTo(bus)
 
 
-User.hasMany(Booking, { foreignKey: 'userId' });
-Booking.belongsTo(User, { foreignKey: 'userId' });
-
-
-Bus.hasMany(Booking, { foreignKey: 'busId' });
-Booking.belongsTo(Bus, { foreignKey: 'busId' });
-
-module.exports = { User, Bus, Booking };
+// module.exports = {user,bus,booking}

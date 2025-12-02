@@ -1,15 +1,8 @@
 const express = require('express');
+const route = express.Router();
 const bookingController = require('../controller/BookingController');
 
-const router = express.Router();
+route.post('/addBooking', bookingController.addBooking);
 
-router.post('/add', bookingController.addBooking);
-
-router.put('/update/:id', bookingController.updateBooking);
-
-router.delete('/delete/:id', bookingController.deleteBooking);
-
-// Optional: Get all bookings (uncomment if needed)
-// router.get('/all', bookingController.getAllBookings);
-
-module.exports = router;
+console.log("Booking routes loaded");
+module.exports = route;

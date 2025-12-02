@@ -1,11 +1,8 @@
 const express = require('express');
+const route = express.Router();
 const userController = require('../controller/userController');
 
-const router = express.Router();
+route.post('/addUser', userController.addUser);
+route.get(`/user/:userId`,userController.getUserWithBooking)
 
-router.post('/add',userController.addValue); 
-router.put('/update/:id',userController.updateValue);            
-router.delete('/delete/:id',userController.deleteValue);
-router.post('/book', userController.bookingSeatsForUsers);
-         
-module.exports = router;
+module.exports = route;

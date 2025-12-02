@@ -1,35 +1,24 @@
-const User = require('../model/userModel');
-const Bus = require('../model/busModel');
 const Booking = require('../model/bookingModel');
 
-const createBookingFlow = async (req, res) => {
+const addBooking = async (req, res) => {
   try {
-    // req.body must contain: user, bus, booking
-    const { user, bus, booking } = req.body;
+    const { userId, busId, seatNumber } = req.body;
 
-    // 1. Create user
-    const createdUser = await User.create(user);
+    if (!userId || !busId || seatNumber == null) {
+      return res.status(400).send('userId, busId, and seatNumber are required');
+    }
 
-    // 2. Create bus
-    const createdBus = await Bus.create(bus);
-
-    // 3. Create booking (using user.id & bus.id)
-    const createdBooking = await Booking.create({
-      seatNumber: booking.seatNumber,
-      userId: createdUser.id,   // relation
-      busId: createdBus.id      // relation
+    const booking = await Booking.create({
+      userId: userId,
+      busId: busId,
+      seatNumber: seatNumber
     });
 
-    res.status(201).json({
-      user: createdUser,
-      bus: createdBus,
-      booking: createdBooking
-    });
-
+    res.status(201).json({ message: 'Booking is created!', booking });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).send('Failed to create booking');
   }
 };
 
-module.exports = { createBookingFlow };
+module.exports = { addBooking };

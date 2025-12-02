@@ -1,11 +1,8 @@
 const express = require('express');
+const route = express.Router();
 const busController = require('../controller/busController');
 
-const router = express.Router();
+route.post('/addBus', busController.addBus);
 
-router.post('/add',busController.addBus); 
-router.put('/update/:id',busController.updateBus);            
-router.delete('/delete/:id',busController.deleteBus);
-// router.get('/all', userController.getUsers);
-         
-module.exports = router;
+console.log("Bus routes loaded");
+module.exports = route;
